@@ -18,6 +18,10 @@
   shell: virtualenv {{virtualenv_dir}}
   when: venv_dir.stat.isdir is not defined
 
+- name: install uwsgi
+  pip: name=uwsgi
+       virtualenv={{virtualenv_dir}}
+
 - name: install web application dependencies listed in requirements.txt
   pip: requirements={{requirements_file}}
        virtualenv={{virtualenv_dir}}

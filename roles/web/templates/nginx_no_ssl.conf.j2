@@ -1,5 +1,5 @@
 upstream app_server_djangoapp {
-  server localhost:8000 fail_timeout=0;
+  server localhost:{{uwsgi_port}} fail_timeout=0;
 }
 
 server {
@@ -15,7 +15,7 @@ server {
 
   # nginx should serve up static files and never send to the WSGI server
   location /static {
-    autoindex on; 
+    autoindex on;
     alias {{app_code_dir}}/assets;
   }
 

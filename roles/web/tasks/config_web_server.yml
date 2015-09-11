@@ -30,7 +30,7 @@
   when: not deploy_ssl
 
 - name: write uwsgi.ini configuration
-  template: src=uwsgi.ini.j2 dest={{app_code_dir}}
+  template: src=uwsgi.ini.j2 dest={{app_code_dir}}/uwsgi.ini
   sudo: yes
 
 - name: write ssl certificate key
