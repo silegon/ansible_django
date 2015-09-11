@@ -1,0 +1,8 @@
+[uwsgi]
+socket=127.0.0.1:{{uwsgi_port}}
+chdir={{app_code_dir}}
+module={{django_wsgi}}
+master=True
+pidfile=/tmp/{{app_name}}.pid
+vacuum=True
+max-requests=5000

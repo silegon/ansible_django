@@ -15,7 +15,9 @@ django_settings_dir_name: django-poll-app
 
 # Django settings module to use when running Manage commands
 # for example, txt2react.settings
-django_settings: django-poll-app.settings
+django_settings: mysite.settings
+
+django_wsgi: mysite.wsgi
 
 # remote git repository to pull application code from, for example:
 # ssh://git@github.com/makaimc/txt2react.git

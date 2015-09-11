@@ -1,7 +1,8 @@
 ---
 
 - name: Install Mysql package
-  apt: name={{ item }} state=installed update_cache={{ update_apt_cache }}
+  apt: name={{ item }} state=installed
+  sudo: yes
   with_items:
    - python-dev
    - libmysqlclient-dev
@@ -11,10 +12,12 @@
 
 - name: Create Mysql configuration file
   template: src=my.cnf.j2 dest=/etc/my.cnf
+  sudo: yes
   notify:
   - restart mysql
 
 - name: Start Mysql Service
+  sudo: yes
   service: name=mysql state=started enabled=true
 
 - name: Create Mysql Database

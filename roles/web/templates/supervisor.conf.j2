@@ -1,9 +1,10 @@
 [program:{{app_name}}]
 environment={% for k, v in django_env_vars.iteritems() %}{% if not loop.first %},{% endif %}{{ k }}="{{ v }}"{% endfor %}
 
-command={{virtualenv_dir}}/bin/gunicorn {{django_settings_dir_name}}.wsgi:application
-directory={{app_code_dir}}
 user={{deploy_user}}
+command={{virtualenv_dir}}/bin/uwsgi --ini {{app_code_dir}}/uwsgi.ini
 autostart=true
 autorestart=true
-redirect_stderr=True
+stdout_logfile=/var/log/supervisor/{{app_name}}-stdout.log
+stderr_logfile=/var/log/supervisor/{{app_name}}-stderr.log
+stopsignal=QUIT
