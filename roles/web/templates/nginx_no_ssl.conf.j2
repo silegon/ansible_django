@@ -20,13 +20,7 @@ server {
   }
 
   location / {
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_redirect off;
-
-    if (!-f $request_filename) {
-      proxy_pass http://app_server_djangoapp;
-      break;
-    }
+    uwsgi_pass  app_server_djangoapp;
+    include   /etc/nginx/uwsgi_params;
   }
 }
