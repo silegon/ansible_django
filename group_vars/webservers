@@ -1,5 +1,5 @@
 ---
 # variables listed here are applicable to web server group
 
-httpd_port: 8030
-uwsgi_port: 49153
+httpd_port: 8040
+uwsgi_port: 49154

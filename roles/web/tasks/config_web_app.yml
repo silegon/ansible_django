@@ -22,6 +22,9 @@
   pip: name=uwsgi
        virtualenv={{virtualenv_dir}}
 
+- name: install django settings.py
+  command: cp {{app_code_dir}}/{{app_name}}/settings.py.example {{app_code_dir}}/{{app_name}}/settings.py
+
 - name: install web application dependencies listed in requirements.txt
   pip: requirements={{requirements_file}}
        virtualenv={{virtualenv_dir}}
