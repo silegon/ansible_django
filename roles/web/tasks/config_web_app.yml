@@ -67,3 +67,8 @@
 #                 fixtures={{fixtures_file}}
 #                 settings={{django_settings}}
 #  environment: django_env_vars
+
+- name: write uwsgi.ini configuration
+  template: src=uwsgi.ini.j2 dest={{app_code_dir}}/uwsgi.ini
+  sudo: yes
+

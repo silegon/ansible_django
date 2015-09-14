@@ -29,10 +29,6 @@
   sudo: yes
   when: not deploy_ssl
 
-- name: write uwsgi.ini configuration
-  template: src=uwsgi.ini.j2 dest={{app_code_dir}}/uwsgi.ini
-  sudo: yes
-
 - name: write ssl certificate key
   template: src=ssl_cert/{{app_name}}.key
             dest=/etc/nginx/{{app_name}}/{{app_name}}.key
