@@ -12,12 +12,20 @@
   apt: name={{item}}
   sudo: yes
   with_items:
+    - tig
     - git
-    - python-dev
     - libpq-dev
-    - python-virtualenv
     - nginx
     - supervisor
-    - postgresql-client-common
-    - postgresql-client
-
+    - libpq-dev
+    - python-dev
+    - python-setuptools
+    - python-pip
+    - python-virtualenv
+    - python-mysqldb
+    - ipython
+    - libmysqlclient-dev
+    - mysql-client
+    - libxml2
+    - libxml2-dev
+    - libxslt1-dev

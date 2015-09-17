@@ -30,7 +30,7 @@ deploy_user: bl_deploy
 
 # this will be removed in a future version once I pull it directly
 # from ansible's environment variables
-webserver_ip: 115.159.88.135
+webserver_ip: 123.57.64.113
 
 # server directory for the virtualenv that will be created to run the web app
 virtualenv_dir: /home/{{deploy_user}}/venvs/{{app_name}}
