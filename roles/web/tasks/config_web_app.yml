@@ -23,6 +23,10 @@
   pip: name=uwsgi
        virtualenv={{virtualenv_dir}}
 
+- name: install ipython
+  pip: name=ipython
+       virtualenv={{virtualenv_dir}}
+
 - name: install django settings.py
   command: cp {{app_code_dir}}/{{app_name}}/settings.py.example {{app_code_dir}}/{{app_name}}/settings.py
 
