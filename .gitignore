@@ -9,3 +9,4 @@ build
 _build
 fabfile.py
 set_envs.sh
+group_vars/all
