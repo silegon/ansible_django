@@ -9,6 +9,7 @@
 
 - name: checkout latest web app code
   git: repo={{code_repository}} dest={{app_code_dir}}
+  ignore_errors: yes
 
 - name: check if virtualenv already exists
   stat: path={{virtualenv_dir}}
@@ -48,6 +49,7 @@
 #  environment: django_env_vars
 
 - name: Django syncdb
+  ignore_errors: yes
   django_manage: command=syncdb
                  app_path={{app_code_dir}}
                  virtualenv={{virtualenv_dir}}
