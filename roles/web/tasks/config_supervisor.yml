@@ -16,7 +16,11 @@
 - name: write supervisor configuration for web application
   template: src=supervisor.conf.j2 dest=/etc/supervisor/conf.d/{{app_name}}.conf
   sudo: yes
+  register: supervisor_app_conf
+
+- name: link supervisord.conf to default location
+  command: ln -s /etc/supervisord/supervisord.conf /etc/supervisord.conf
+  when: supervisor_app_conf
   notify:
     - restart supervisor
     - restart nginx
-
