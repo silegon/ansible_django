@@ -10,11 +10,11 @@
    - libapache2-mod-auth-mysql
    - python-mysqldb
 
-- name: Create Mysql configuration file
-  template: src=my.cnf.j2 dest=/etc/my.cnf
-  sudo: yes
-  notify:
-  - restart mysql
+#- name: Create Mysql configuration file
+#  template: src=my.cnf.j2 dest=/etc/my.cnf
+#  sudo: yes
+#  notify:
+#  - restart mysql
 
 - name: Start Mysql Service
   sudo: yes

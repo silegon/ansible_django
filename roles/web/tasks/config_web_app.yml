@@ -28,7 +28,8 @@
        virtualenv={{virtualenv_dir}}
 
 - name: install django settings.py
-  command: cp {{app_code_dir}}/{{app_name}}/settings.py.example {{app_code_dir}}/{{app_name}}/settings.py
+  #command: cp {{app_code_dir}}/{{app_name}}/settings.py.example {{app_code_dir}}/{{app_name}}/settings.py
+  file: src={{app_code_dir}}/{{app_name}}/settings.py.example dest={{app_code_dir}}/{{app_name}}/settings.py owner={{deploy_user}} user={{deploy_user}}
 
 - name: install web application dependencies listed in requirements.txt
   pip: requirements={{requirements_file}}

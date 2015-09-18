@@ -6,3 +6,13 @@ master=True
 pidfile=/tmp/{{app_name}}.pid
 vacuum=True
 max-requests=5000
+# set cheaper algorithm to use, if not set default will be used
+cheaper-algo = spare
+# minimum number of workers to keep at all times
+cheaper = 2
+# number of workers to spawn at startup
+cheaper-initial = 5
+# maximum number of workers that can be spawned
+workers = 20
+# how many workers should be spawned at a time
+cheaper-step = 1
