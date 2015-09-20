@@ -3,3 +3,4 @@
 
 httpd_port: 8040
 uwsgi_port: 49154
+gunicorn_port: 39154

@@ -28,8 +28,9 @@
        virtualenv={{virtualenv_dir}}
 
 - name: install django settings.py
-  #command: cp {{app_code_dir}}/{{app_name}}/settings.py.example {{app_code_dir}}/{{app_name}}/settings.py
-  file: src={{app_code_dir}}/{{app_name}}/settings.py.example dest={{app_code_dir}}/{{app_name}}/settings.py owner={{deploy_user}} user={{deploy_user}}
+  file: src={{app_code_dir}}/{{app_name}}/settings.py.example
+        dest={{app_code_dir}}/{{app_name}}/settings.py
+        owner={{deploy_user}} group={{deploy_user}}
 
 - name: install web application dependencies listed in requirements.txt
   pip: requirements={{requirements_file}}
@@ -42,9 +43,6 @@
 - name: create static directory for Django app if it does not exist
   command: mkdir {{app_code_dir}}/static
   when: static_dir.stat.isdir is not defined
-
-- name: debug
-  debug: msg="app_code_dir {{app_code_dir}}, virtualenv_dir {{virtualenv_dir}}"
 
 #- name: Django collectstatic
 #  django_manage: command=collectstatic
@@ -81,4 +79,16 @@
 - name: write uwsgi.ini configuration
   template: src=uwsgi.ini.j2 dest={{app_code_dir}}/uwsgi.ini
   sudo: yes
+  when: uwsgi_mode
+
+- name: create gunicorn log directory
+  file: dest=/var/log/gunicorn mode=755 owner={{deploy_user}} group={{deploy_user}} state=directory
+  sudo: yes
+  when: gunicorn_mode
+
+- name: write gunicorn_config.py configuration
+  template: src=gunicorn_config.py.j2 dest={{app_code_dir}}/gunicorn_config.py owner={{deploy_user}} group={{deploy_user}}
+  sudo: yes
+  when: gunicorn_mode
+
 

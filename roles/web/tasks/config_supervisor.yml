@@ -13,13 +13,19 @@
   sudo: yes
   when: supervisor_sock_file.stat.exists
 
-- name: write supervisor configuration for web application
-  template: src=supervisor.conf.j2 dest=/etc/supervisor/conf.d/{{app_name}}.conf
+- name: write supervisor uwsgi configuration for web application
+  template: src=uwsgi_supervisor.conf.j2 dest=/etc/supervisor/conf.d/{{app_name}}.conf
   sudo: yes
+  when: uwsgi_mode
+
+- name: write supervisor gunicorn configuration for web application
+  template: src=gunicorn_supervisor.conf.j2 dest=/etc/supervisor/conf.d/{{app_name}}.conf
+  sudo: yes
+  when: gunicorn_mode
 
 - name: link supervisord.conf to default location
   file: path=/etc/supervisord.conf
-        src=/etc/supervisord/supervisord.conf
+        src=/etc/supervisor/supervisord.conf
         state=link
         force=yes
   sudo: yes

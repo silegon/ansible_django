@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#https://github.com/duoduo369/django_supervisor_gunicorn_demo/blob/master/gunicorn/gunicorn_config.py
+
+import multiprocessing
+BASE_PATH = '{{app_code_dir}}'
+bind = "127.0.0.1:{{gunicorn_port}}"
+workers = multiprocessing.cpu_count()
+
+max_requests = 5000
+
+user = '{{deploy_user}}'
+group = '{{deploy_user}}'
+
+accesslog = '/var/log/gunicorn/{{app_name}}_access.log'
+errorlog = '/var/log/gunicorn/{{app_name}}_error.log'
+chdir = BASE_PATH

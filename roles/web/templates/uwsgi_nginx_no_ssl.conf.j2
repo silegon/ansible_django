@@ -1,4 +1,4 @@
-upstream app_server_blended_learning {
+upstream uwsgi_app_server_{{app_name}} {
   server localhost:{{uwsgi_port}} fail_timeout=0;
 }
 
@@ -20,7 +20,7 @@ server {
   }
 
   location / {
-    uwsgi_pass  app_server_blended_learning;
+    uwsgi_pass  app_server_{{app_name}};
     include   /etc/nginx/uwsgi_params;
   }
 }

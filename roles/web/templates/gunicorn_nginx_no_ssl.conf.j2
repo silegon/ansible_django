@@ -1,0 +1,35 @@
+upstream gunicorn_app_server_{{app_name}} {
+        server localhost:{{gunicorn_port}} fail_timeout=0;
+}
+
+server {
+    listen {{httpd_port}};
+    server_name {{root_domain_name}};
+
+    ssl                  off;
+
+    location /static {
+        autoindex on;
+        alias {{app_code_dir}}/static;
+    }
+
+    access_log /var/log/nginx/{{root_domain_name}}.access.log;
+    error_log /var/log/nginx/{{root_domain_name}}.error.log info;
+
+    # Serve a static file (ex. favico)
+    # outside /static directory
+    #location = /favico.ico  {
+    #    root /app/favico.ico;
+
+    #}
+
+    location / {
+        proxy_pass         http://gunicorn_app_server_{{app_name}};
+        proxy_redirect     off;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Host $server_name;
+
+    }
+}

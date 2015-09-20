@@ -53,6 +53,11 @@ ssh_dir: /home/{{deploy_user}}/.ssh
 # for example, txt2react.com
 root_domain_name: 
 
+# choose web serve mode, uwsgi or gunicorn.
+# set one of them be true, the remaining should bu false.
+gunicorn_mode: true
+uwsgi_mode: flase
+
 # for now, disable SSL (deploying with SSL works but need to update scripts
 # to use it)
 deploy_ssl: false

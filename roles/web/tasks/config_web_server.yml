@@ -24,10 +24,15 @@
   sudo: yes
   when: deploy_ssl
 
-- name: write non-SSL nginx configuration
-  template: src=nginx_no_ssl.conf.j2 dest=/etc/nginx/conf.d/{{app_name}}.conf
+- name: write uwsgi non-SSL nginx configuration
+  template: src=uwsgi_nginx_no_ssl.conf.j2 dest=/etc/nginx/conf.d/{{app_name}}.conf
   sudo: yes
-  when: not deploy_ssl
+  when: not deploy_ssl and uwsgi_mode
+
+- name: write gunicorn non-SSL nginx configuration
+  template: src=gunicorn_nginx_no_ssl.conf.j2 dest=/etc/nginx/conf.d/{{app_name}}.conf
+  sudo: yes
+  when: not deploy_ssl and gunicorn_mode
 
 - name: write ssl certificate key
   template: src=ssl_cert/{{app_name}}.key
