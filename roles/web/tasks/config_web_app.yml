@@ -28,13 +28,16 @@
        virtualenv={{virtualenv_dir}}
 
 - name: install django settings.py
+  sudo: yes
   file: src={{app_code_dir}}/{{app_name}}/settings.py.example
         dest={{app_code_dir}}/{{app_name}}/settings.py
-        owner={{deploy_user}} group={{deploy_user}}
+        owner={{deploy_user}}
+        group={{deploy_user}}
 
 - name: install web application dependencies listed in requirements.txt
   pip: requirements={{requirements_file}}
        virtualenv={{virtualenv_dir}}
+  when: install_requirements
 
 - name: check if app/static directory exists
   stat: path={{app_code_dir}}/static
