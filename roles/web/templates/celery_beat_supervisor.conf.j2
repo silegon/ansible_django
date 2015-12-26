@@ -1,0 +1,13 @@
+[program:celery_beat_{{app_name}}]
+command={{virtualenv_dir}}/bin/python {{app_code_dir}}/manage.py celeryd worker --loglevel=info -E -B -c 1
+directory={{virtualenv_dir}}/bin
+user=nobody
+numprocs=1
+stdout_logfile=/var/log/supervisor/supervisor-celery-beat-{{app_name}}-stdout.log
+stderr_logfile=/var/log/supervisor/supervisor-celery-beat-{{app_name}}-stdout.log
+autostart=true
+autorestart=true
+startsecs=10
+stopwaitsecs = 600
+killasgroup=true
+priority=997
