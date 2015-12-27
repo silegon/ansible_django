@@ -27,6 +27,10 @@
   template: src=celery_supervisor.conf.j2 dest=/etc/supervisor/conf.d/celery_{{app_name}}.conf
   sudo: yes
 
+- name: write supervisor celery beat configuration
+  template: src=celery_beat_supervisor.conf.j2 dest=/etc/supervisor/conf.d/celery_beat_{{app_name}}.conf
+  sudo: yes
+
 - name: write default supervisor DAEMON_OPTS
   lineinfile: dest=/etc/default/supervisor regexp='DAEMON_OPTS' line='DAEMON_OPTS="-c /etc/supervisor/supervisord.conf"'
   sudo: yes
